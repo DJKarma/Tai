@@ -9,12 +9,17 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 #reading the file
-df=pd.read_excel('cmarf.xlsx')
+df=pd.read_excel('JFM.xlsx')
+df
 df.head
+sns.heatmap(df.isnull(),yticklabels=False,cbar=False,cmap='viridis')
+df.isnull().count
+
 from sklearn.model_selection import train_test_split
 X = df.drop('MachineIMM',axis=1)
 y = df['MachineIMM']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.11)
+X
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.21)
 
 from xgboost import XGBClassifier
 from sklearn.linear_model import LogisticRegression
@@ -43,8 +48,9 @@ print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, predictions)))
 
 
 
-dj=pd.read_excel('test.xlsx')
-predictions = rfc.predict(dj)
+dj=pd.read_excel('JFMm.xlsx')
+dj
+predictions = logmodel.predict(dj)
 predictions = pd.DataFrame(predictions)
 writer = pd.ExcelWriter('ntest.xlsx', engine='xlsxwriter')
 predictions.to_excel(writer, sheet_name='Sheet1')
