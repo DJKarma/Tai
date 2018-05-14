@@ -14,6 +14,7 @@ df
 df.head
 sns.heatmap(df.isnull(),yticklabels=False,cbar=False,cmap='viridis')
 df.isnull().count
+df.corr()
 
 from sklearn.model_selection import train_test_split
 X = df.drop('MachineIMM',axis=1)
